@@ -60,6 +60,7 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPS/d' .config #删除配置项adbyby plus+
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config #删除配置项adbyby plus+
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS/d' .config #删除配置项阿里DDNS
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
@@ -73,6 +74,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #TUNSAFE
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #阿里DDNS
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：

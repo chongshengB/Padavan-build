@@ -89,8 +89,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_FFMPEG_NEW=y" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=y" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=y" >> .config

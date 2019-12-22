@@ -61,13 +61,27 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config #删除配置项adbyby plus+
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS/d' .config #删除配置项阿里DDNS
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_MINIDLNA/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_FFMPEG_NEW/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_TRANSMISSION/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_CURL/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_OPENVPN/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_HTTPS/d' .config
+        sed -i 'CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' .config
+        
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #MENTOHUST
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n" >> .config #SCUTCLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+
-        echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server
+        echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=y" >> .config #SS server
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #内网穿透FRPC
@@ -75,6 +89,20 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #TUNSAFE
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #阿里DDNS
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_FFMPEG_NEW=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_CURL=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=y" >> .config
+
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：

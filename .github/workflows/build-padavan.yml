@@ -69,9 +69,6 @@ jobs:
         sed -i 'CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL/d' .config
         sed -i 'CONFIG_FIRMWARE_INCLUDE_CURL/d' .config
         sed -i 'CONFIG_FIRMWARE_INCLUDE_OPENVPN/d' .config
-        sed -i 'CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config
-        sed -i 'CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config
-        sed -i 'CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config
         sed -i 'CONFIG_FIRMWARE_INCLUDE_HTTPS/d' .config
         sed -i 'CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' .config
         
@@ -97,9 +94,6 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_CURL=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=y" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=y" >> .config
 

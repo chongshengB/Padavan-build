@@ -70,6 +70,9 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENVPN/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_HTTPS/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIDLNA/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DDNS_SSL/d' .config
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
@@ -93,6 +96,9 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_DDNS_SSL=y" >> .config
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：

@@ -83,7 +83,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_LPRD=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_SFTP=y" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config

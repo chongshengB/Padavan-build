@@ -71,13 +71,13 @@ jobs:
         ######################################################################
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #MENTOHUST
         #echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> .config #MENTOHUST
-        echo "CONFIG_FIRMWARE_INCLUDE_ENABLE_USB=n" >> .config #MENTOHUST
+        echo "CONFIG_FIRMWARE_INCLUDE_ENABLE_USB=y" >> .config #MENTOHUST
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n" >> .config #SCUTCLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config #SS plus+
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #adbyby plus+
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #内网穿透FRPC
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config #内网穿透FRPC
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #TUNSAFE
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #阿里DDNS
@@ -85,6 +85,17 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config
+        ###########################################################################################
+        sed -i '/CONFIG_RAETH_ESW_PORT_WAN/d'  /opt/rt-n56u/trunk/configs/boards/NEWIFI-MINI/kernel-3.4.x.config
+        echo "CONFIG_RAETH_ESW_PORT_WAN=4" >> /opt/rt-n56u/trunk/configs/boards/NEWIFI-MINI/kernel-3.4.x.config
+        sed -i '/CONFIG_RAETH_ESW_PORT_LAN1/d'  /opt/rt-n56u/trunk/configs/boards/NEWIFI-MINI/kernel-3.4.x.config
+        echo "CONFIG_RAETH_ESW_PORT_LAN1=4" >> /opt/rt-n56u/trunk/configs/boards/NEWIFI-MINI/kernel-3.4.x.config
+        sed -i '/CONFIG_RAETH_ESW_PORT_LAN2/d'  /opt/rt-n56u/trunk/configs/boards/NEWIFI-MINI/kernel-3.4.x.config
+        echo "CONFIG_RAETH_ESW_PORT_LAN2=3" >> /opt/rt-n56u/trunk/configs/boards/NEWIFI-MINI/kernel-3.4.x.config
+        sed -i '/CONFIG_RAETH_ESW_PORT_LAN3/d'  /opt/rt-n56u/trunk/configs/boards/NEWIFI-MINI/kernel-3.4.x.config
+        echo "CONFIG_RAETH_ESW_PORT_LAN3=2" >> /opt/rt-n56u/trunk/configs/boards/NEWIFI-MINI/kernel-3.4.x.config
+        sed -i '/CONFIG_RAETH_ESW_PORT_LAN4/d'  /opt/rt-n56u/trunk/configs/boards/NEWIFI-MINI/kernel-3.4.x.config
+        echo "CONFIG_RAETH_ESW_PORT_LAN4=1" >> /opt/rt-n56u/trunk/configs/boards/NEWIFI-MINI/kernel-3.4.x.config
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：

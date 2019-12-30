@@ -31,7 +31,7 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/bingdao1/rt-n56u.git /opt/rt-n56u
         cd /opt/rt-n56u/toolchain-mipsel
         mkdir -p toolchain-3.4.x
         wget https://github.com/hanwckf/padavan-toolchain/releases/download/v1.0/mipsel-linux-uclibc.tar.xz
@@ -85,20 +85,6 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config
-        ###########################################################################################
-        
-        chmod 777 ./configs/boards/NEWIFI-MINI/kernel-3.4.x.config
-        sed -i '/CONFIG_RAETH_ESW_PORT_WAN/d'  ./configs/boards/NEWIFI-MINI/kernel-3.4.x.config
-        echo "CONFIG_RAETH_ESW_PORT_WAN=4" >> ./configs/boards/NEWIFI-MINI/kernel-3.4.x.config
-        sed -i '/CONFIG_RAETH_ESW_PORT_LAN1/d'  ./configs/boards/NEWIFI-MINI/kernel-3.4.x.config
-        echo "CONFIG_RAETH_ESW_PORT_LAN1=4" >> ./configs/boards/NEWIFI-MINI/kernel-3.4.x.config
-        sed -i '/CONFIG_RAETH_ESW_PORT_LAN2/d'  ./configs/boards/NEWIFI-MINI/kernel-3.4.x.config
-        echo "CONFIG_RAETH_ESW_PORT_LAN2=3" >> ./configs/boards/NEWIFI-MINI/kernel-3.4.x.config
-        sed -i '/CONFIG_RAETH_ESW_PORT_LAN3/d'  ./configs/boards/NEWIFI-MINI/kernel-3.4.x.config
-        echo "CONFIG_RAETH_ESW_PORT_LAN3=2" >> ./configs/boards/NEWIFI-MINI/kernel-3.4.x.config
-        sed -i '/CONFIG_RAETH_ESW_PORT_LAN4/d'  ./configs/boards/NEWIFI-MINI/kernel-3.4.x.config
-        echo "CONFIG_RAETH_ESW_PORT_LAN4=1" >> ./configs/boards/NEWIFI-MINI/kernel-3.4.x.config
-        #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
         #sed -i '/自定义项/d' .config

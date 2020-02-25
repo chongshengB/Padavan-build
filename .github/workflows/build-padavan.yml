@@ -5,7 +5,7 @@ on:
   release:
     types: [published]
   push:
-    tags: 
+    tags:
     - 'v*'
   #  branches: 
   #    - master

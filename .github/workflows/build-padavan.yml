@@ -57,11 +57,11 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config #删除配置项SS server
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config #删除配置项DNSFORWARDER
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ADBYBY/d' .config #删除配置项adbyby plus+
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPC/d' .config #删除配置项adbyby plus+
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPS/d' .config #删除配置项adbyby plus+
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config #删除配置项adbyby plus+
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPC/d' .config #删除配置项内网穿透FRPC
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPS/d' .config #删除配置项内网穿透FRPS
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config #删除配置项TUNSAFE
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS/d' .config #删除配置项阿里DDNS
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config #删除配置项smartdns
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
@@ -82,8 +82,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config #KP广告过滤
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=y" >> .config #在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=y" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=y" >> .config #KumaSocks
+        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=y" >> .config #ADGUARDHOME广告过滤
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：

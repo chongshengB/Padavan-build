@@ -1,5 +1,5 @@
-#修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
-name: Build Padavan
+#修改TNAME: MI-R3G 中的MI-R3G为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
+name: Build Firmware
 
 on: 
   release:
@@ -40,7 +40,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P-5.0
+        TNAME: MI-R3G
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -72,16 +72,16 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
-        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #adbyby plus+
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #内网穿透FRPC
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
+        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config #adbyby plus+
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config #内网穿透FRPC
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=y" >> .config #内网穿透FRPS
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #TUNSAFE
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #阿里DDNS
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config #smartdns
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=y" >> .config #smartdns二进制文件
-        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件（3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config #KP广告过滤
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config #smartdns二进制文件
+        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config #集成v2ray执行文件（3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config #KP广告过滤
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=y" >> .config #在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config #可以不集成

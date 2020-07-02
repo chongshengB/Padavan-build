@@ -10,6 +10,7 @@
 - 修改需要的插件，请按需修改需要集成哪些插件，文件中都有注释，定义你需要的功能（y=集成,n=忽略）
 3. 创建Release（可选）
 4. 点击右上角的 Star 星星按钮即可开始自动编译（自己点击才会编译）
+5. Actions中build详情的Artifacts下下载
 
 # [固件说明](https://github.com/chongshengB/rt-n56u)
 - 默认登陆IP:192.168.2.1

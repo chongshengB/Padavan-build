@@ -68,6 +68,7 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENSSH/d' .config #删除SSH功能配置项
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SFTP/d' .config #删除SFTP功能配置项
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SMBD36/d' .config #删除SMBD3.6功能配置项
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_EAP_PEAP/d' .config #删除EAP_PEAP功能配置项
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config 
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config 
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
@@ -104,6 +105,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=n" >> .config  #去除SSH功能
         echo "CONFIG_FIRMWARE_INCLUDE_SFTP=n" >> .config  #去除SFTP功能
         echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=n" >> .config  #去除SMBD3.6功能
+        echo "CONFIG_FIRMWARE_INCLUDE_EAP_PEAP=n" >> .config  #去除EAP_PEAP功能
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可

@@ -63,14 +63,14 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_WIFI2_DRIVER/d' .config #删除2.4G驱动配置项
         sed -i '/#CONFIG_FIRMWARE_CPU_600MHZ/d' .config #删除CPU超频配置项
         sed -i '/#CONFIG_FIRMWARE_CPU_SLEEP/d' .config #删除CPU休眠配置项
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' .config #删除用于 IPTV 的 XUPNP配置项
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' .config #删除用于 Drcom 的工具配置项
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIEAP/d' .config #删除可用于锐捷的 eap 客户端配置项
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT/d' .config #删除南工网络客户端配置项
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENSSH/d' .config #删除南工网络客户端配置项
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SFTP/d' .config #删除南工网络客户端配置项
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config #删除SSH功能配置项
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config #删除TFTP功能配置项
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' .config #删除用于 IPTV 的 XUPNP配置项
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' .config #删除用于 Drcom 的工具配置项
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIEAP/d' .config #删除可用于锐捷的 eap 客户端配置项
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT/d' .config #删除南工网络客户端配置项
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENSSH/d' .config #删除SSH功能配置项
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SFTP/d' .config #删除SFTP功能配置项
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config 
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config 
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
@@ -100,10 +100,10 @@ jobs:
         echo "CONFIG_FIRMWARE_WIFI2_DRIVER=3.0" >> .config #2.4G驱动设置为3.0 
         echo "CONFIG_FIRMWARE_CPU_600MHZ=y" >> .config #启动自动超频
         echo "CONFIG_FIRMWARE_CPU_SLEEP=y" >> .config #启动休眠 
-        echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> .config #去除用于 IPTV 的 XUPNP        
-        echo "CONFIG_FIRMWARE_INCLUDE_DOGCOM=n" >> .config  #去除用于 Drcom 的工具
-        echo "CONFIG_FIRMWARE_INCLUDE_MINIEAP=n" >> .config  #去除可用于锐捷的 eap 客户端
-        echo "CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT=n" >> .config  #去除南工网络客户端
+        #echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> .config #去除用于 IPTV 的 XUPNP        
+        #echo "CONFIG_FIRMWARE_INCLUDE_DOGCOM=n" >> .config  #去除用于 Drcom 的工具
+        #echo "CONFIG_FIRMWARE_INCLUDE_MINIEAP=n" >> .config  #去除可用于锐捷的 eap 客户端
+        #echo "CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT=n" >> .config  #去除南工网络客户端
         echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=n" >> .config  #去除SSH功能
         echo "CONFIG_FIRMWARE_INCLUDE_SFTP=n" >> .config  #去除SFTP功能
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M

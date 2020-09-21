@@ -64,6 +64,9 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL/d' .config #删除配置项TRANSMISSION_WEB_CONTROL
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config #删除配置项Aria
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL/d' .config #删除配置项Aria的网页配置
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SERIAL/d' .config #删除配置项
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_AUDIO/d' .config #删除配置项
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' .config #删除配置项
         #sed -i '/CONFIG_FIRMWARE_WIFI2_DRIVER/d' .config #删除2.4G驱动配置项
         sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' .config #删除用于 IPTV 的 XUPNP配置项
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' .config #删除用于 Drcom 的工具配置项
@@ -99,6 +102,9 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config #可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_SERIAL=n" >> .config #可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_AUDIO=n" >> .config #可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config #可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config #网易云解锁
         echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=y" >> .config #集成远程下载

@@ -1,4 +1,4 @@
-#修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
+#B70/E8820S 128M USB+Adbyby+Aliddns+SS+在线文件管理
 name: Build Padavan
 
 on: 

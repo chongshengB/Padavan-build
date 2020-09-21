@@ -103,8 +103,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=y" >> .config #集成远程下载
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=y" >> .config #集成远程下载的配置网页
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config #Aria
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config #Aria的网页控制
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=n" >> .config #Aria
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=n" >> .config #Aria的网页控制
         #echo "CONFIG_FIRMWARE_WIFI2_DRIVER=3.0" >> .config #2.4G驱动设置为3.0 
         echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> .config #去除用于 IPTV 的 XUPNP        
         echo "CONFIG_FIRMWARE_INCLUDE_DOGCOM=n" >> .config  #去除用于 Drcom 的工具

@@ -1,4 +1,4 @@
-#B70/E8820S 128M USB+Adbyby+Aliddns+SS+在线文件管理+远程下载
+#诺基亚贝尔 128M USB+Adbyby+Aliddns+SS+在线文件管理+远程下载
 name: Build Padavan
 
 on: 
@@ -38,7 +38,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: B70
+        TNAME: MSG1500-7615
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then

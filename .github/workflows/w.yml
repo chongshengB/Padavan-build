@@ -8,7 +8,7 @@ on:
     tags:
     - 'v*'
     branches: 
-      - master
+     - master
 #  schedule:
 #    - cron: 0 8 * * 5
  # watch:
@@ -39,7 +39,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P
+        TNAME: RM2100
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then

@@ -1,16 +1,15 @@
 #修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
 name: Build RM2100
 
-on: 
-  release:
-    types: [published]
-  push:
-    tags:
-    - 'v*'
-  #  branches: 
-  #    - master
-#  schedule:
-#    - cron: 0 8 * * 5
+
+on:
+  # schedule:                           # 时间表
+  #   - cron: '0 19 * * *'              # 每天国际时间19点，北京时间凌晨3点执行(北京+8)
+  push:                               # push 操作
+    branches:                         # 分支
+      - master                        # 主分支
+#     paths:                            # 路径
+#       - logs/n3.md                    # 监听logs目录下 k2.md 的push操作
   watch:
     types: [started]
 

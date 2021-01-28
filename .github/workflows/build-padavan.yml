@@ -8,10 +8,10 @@ on:
   push:                               # push 操作
     branches:                         # 分支
       - master                        # 主分支
-#     paths:                            # 路径
-#       - logs/n3.md                    # 监听logs目录下 k2.md 的push操作
-  watch:
-    types: [started]
+  #   paths:                            # 路径
+  #     - openwrt/*                     # 监听openwrt目录下所有文件的push操作
+    paths:                            # 路径
+      - test.md                    # 监听logs目录下 k2.md 的push操作
 
 jobs:
   build:

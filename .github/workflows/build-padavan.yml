@@ -3,15 +3,14 @@ name: Build RM2100
 
 
 on:
-  # schedule:                           # 时间表
-  #   - cron: '0 19 * * *'              # 每天国际时间19点，北京时间凌晨3点执行(北京+8)
-  push:                               # push 操作
-    branches:                         # 分支
-      - master                        # 主分支
-  #   paths:                            # 路径
-  #     - openwrt/*                     # 监听openwrt目录下所有文件的push操作
-    paths:                            # 路径
-      - test.md                    # 监听logs目录下 k2.md 的push操作
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build:

@@ -1,17 +1,14 @@
 #修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
 name: Build RM2100
 
-
-on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+on: 
+  release:
+    types: published
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
+    branches:
+      - master
+    paths:
+      - 'RM2100.config'
 jobs:
   build:
     runs-on: ubuntu-18.04

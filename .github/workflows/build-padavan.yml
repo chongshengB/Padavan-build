@@ -1,18 +1,27 @@
 #修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
 name: Build Padavan
 
-on: 
-  release:
-    types: [published]
-  push:
-    tags:
-    - 'v*'
-  #  branches: 
-  #    - master
+#on: 
+#  release:
+#    types: [published]
+#  push:
+#    tags:
+#    - 'v*'
+#  #  branches: 
+#  #    - master
 #  schedule:
 #    - cron: 0 8 * * 5
 #  watch:
 #    types: [started]
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
 
 jobs:
   build:

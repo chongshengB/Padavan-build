@@ -104,6 +104,6 @@ jobs:
       with:
         file: /opt/images/*.trx
         name: Padavan-packages
-#        path: /opt/images
+        path: /opt/images
         overwrite: true
         file_glob: true

@@ -94,9 +94,11 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_LANG_UK/d' .config #英文语言
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' .config #网页终端工具
         sed -i '/CONFIG_FIRMWARE_INCLUDE_LRZSZ/d' .config #Linux和Windows互传文件的工具
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NAPT66/d' .config #教育网用
         echo "CONFIG_FIRMWARE_INCLUDE_LANG_CN=y" >> .config #中文语言
         echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config
         #########################################################################################
         cp -f .config configs/templates/$TNAME.config #复制config文件到configs/templates目录下
         sudo ./clear_tree

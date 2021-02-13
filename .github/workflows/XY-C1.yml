@@ -1,5 +1,5 @@
 #修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
-name: Build Padavan
+name: Build Padavan XY-C1
 
 on: 
   release:
@@ -108,10 +108,7 @@ jobs:
         #格式如下：
         #sed -i '/自定义项/d' .config
         #echo "自定义项=y" >> .config
-        sed -i "/CONFIG_FIRMWARE_INCLUDE_OPENSSH/d" .config             # 删除配置项 OpenSSH
-        sed -i "/CONFIG_FIRMWARE_INCLUDE_DDNS_SSL/d"  .config           # HTTPS support for DDNS client
-        sed -i "/CONFIG_FIRMWARE_INCLUDE_HTTPS/d"  .config              # HTTPS support
-        
+    
         echo "/CONFIG_FIRMWARE_INCLUDE_OPENSSH=y" >> .config            # OpenSSH
         echo "/CONFIG_FIRMWARE_INCLUDE_DDNS_SSL=y" >> .config           # HTTPS support for DDNS client
         echo "/CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config              # HTTPS support

@@ -109,9 +109,9 @@ jobs:
         #sed -i '/自定义项/d' .config
         #echo "自定义项=y" >> .config
     
-        echo "/CONFIG_FIRMWARE_INCLUDE_OPENSSH=y" >> .config            # OpenSSH
-        echo "/CONFIG_FIRMWARE_INCLUDE_DDNS_SSL=y" >> .config           # HTTPS support for DDNS client
-        echo "/CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config              # HTTPS support
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSH=y" >> .config            # OpenSSH
+        echo "CONFIG_FIRMWARE_INCLUDE_DDNS_SSL=y" >> .config           # HTTPS support for DDNS client
+        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config              # HTTPS support
               
         # C大
         #########################################################################################

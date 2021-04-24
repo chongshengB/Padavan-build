@@ -38,7 +38,6 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        MHZ: 1100
         TNAME: RM2100
       run: |
         cd /opt/rt-n56u/trunk

@@ -39,11 +39,11 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: MR2600
+        TNAME: K2P
       run: |
         cd /opt/rt-n56u/trunk
         sudo ./clear_tree
-        sudo fakeroot ./build_firmware_modify MR2600
+        sudo fakeroot ./build_firmware_modify $TNAME
         sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
       uses: actions/upload-artifact@master

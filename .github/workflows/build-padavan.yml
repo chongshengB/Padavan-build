@@ -43,7 +43,7 @@ jobs:
       run: |
         cd /opt/rt-n56u/trunk
         sudo ./clear_tree
-        sudo fakeroot ./build_firmware_modify $TNAME
+        sudo fakeroot ./build_firmware_modify MR2600
         sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
       uses: actions/upload-artifact@master

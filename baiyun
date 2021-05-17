@@ -1,0 +1,106 @@
+＃修改TNAME：K2P-5.0中的K2P-5.0为你需要编译的型号，注意名称要与configs / templates /目录下的名字相同
+名称：Build Padavan
+
+上： 
+  释放：
+    类型：[已发布]
+  推：
+    标签：
+    -'v *'
+  ＃个分支： 
+  ＃ - 掌握
+＃ 日程：
+＃-cron：0 8 * * 5
+  手表：
+    类型：[开始]
+
+职位：
+  建造：
+    运行：ubuntu-18.04
+    如果：github.event.repository.owner.id == github.event.sender.id
+
+    脚步：
+    -名称：结帐
+      用途：actions / checkout @ master
+    -名称：初始化环境
+      环境：
+        DEBIAN_FRONTEND：非互动
+      运行：
+        sudo apt-get更新
+        sudo apt-get -y install解压缩libtool-bin curl cmake gperf gawk flex野牛nano xxd fakeroot \
+        cpio git python-docutils gettext automake自动指向texinfo建立基本的help2man \
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+    -名称：克隆源代码
+      运行：
+        git clone --depth = 1 https://github.com/chongshengB/rt-n56u.git / opt / rt-n56u
+        cd / opt / rt-n56u / toolchain-mipsel
+        sh dl_toolchain.sh
+        mkdir -p / opt / images /
+    -名称：Build Firmware
+      环境：
+        TNAME：K2P-5.0
+      运行：
+        cd / opt / rt-n56u / trunk
+        如果 [ ！-f configs / templates / $ TNAME.config]; 然后
+        回显“未找到configs / templates / $ TNAME.config”
+        1号出口
+        科幻
+        cp -f configs / templates / $ TNAME.config .config
+        sed -i's / CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE = n / CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE = y / g'.config
+        ################################################ #############################################
+        ＃因不同型号配置功能不一样，所以先把配置项删除，如果你自己要添加其他的，也要写上删除这一条，切记！！！
+        ################################################ #############################################
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_MENTOHUST / d'.config＃删除配置项MENTOHUST
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT / d'.config＃删除配置项SCUTCLIENT
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS / d'.config＃删除配置项SS plus +
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_SSSERVER / d'.config＃删除配置项SS服务器
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER / d'.config＃删除配置项DNSFORWARDER
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_ADBYBY / d'.config＃删除配置项adbyby plus +
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_FRPC / d'.config＃删除配置项adbybyby +
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_FRPS / d'.config＃删除配置项adbybyby +
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_TUNSAFE / d'.config＃删除配置项adbyby by +
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_ALIDDNS / d'.config＃删除配置项阿里DDNS
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_SMARTDNS / d'.config
+        sed -i'/ CONFIG_FIRMWARE_INCLUDE_SRELAY / d'.config
+        sed -i's / CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE = n / CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE = y / g'.config
+        ################################################ ####################
+        ＃以下选项是定义你需要的功能（y =集成，n =忽略），重新写入到.config文件
+        ################################################ ####################
+        回声“ CONFIG_FIRMWARE_INCLUDE_MENTOHUST = n” >> .config #MENTOHUST
+        回声“ CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT = n” >> .config #SCUTCLIENT
+        回声“ CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS = y” >> .config #SS plus +
+        echo“ CONFIG_FIRMWARE_INCLUDE_SSOBFS = n” >> .config＃simple-obfs可以插入插件
+        echo“ CONFIG_FIRMWARE_INCLUDE_SSSERVER = n” >> .config #SS服务器
+        回声“ CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER = n” >> .config #DNSFORWARDER
+        回声“ CONFIG_FIRMWARE_INCLUDE_ADBYBY = y” >> .config #adbyby plus +
+        echo“ CONFIG_FIRMWARE_INCLUDE_FRPC = n” >> .config＃内网穿透FRPC
+        echo“ CONFIG_FIRMWARE_INCLUDE_FRPS = n” >> .config＃内网穿透FRPS
+        回声“ CONFIG_FIRMWARE_INCLUDE_TUNSAFE = n” >> .config #TUNSAFE
+        echo“ CONFIG_FIRMWARE_INCLUDE_ALIDDNS = y” >> .config＃阿里DDNS
+        回声“ CONFIG_FIRMWARE_INCLUDE_SMARTDNS = y” >> .config #smartdns
+        回声“ CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN = y” >> .config #smartdns二进制文件
+        echo“ CONFIG_FIRMWARE_INCLUDE_V2RAY = n” >> .config＃集成v2ray执行文件（3.8M左右），如果不集成，会从网上下载下来执行，不影响正常使用
+        echo“ CONFIG_FIRMWARE_INCLUDE_TROJAN = n” >> .config＃集成trojan执行文件（1.1M左右），如果不集成，会从网上下载下来执行，不影响正常使用
+        echo“ CONFIG_FIRMWARE_INCLUDE_KOOLPROXY = y” >> .config #KP广告过滤
+        echo“ CONFIG_FIRMWARE_INCLUDE_CADDY = y” >> .config＃在线文件管理服务
+        echo“ CONFIG_FIRMWARE_INCLUDE_CADDYBIN = n” >> .config＃集成caddu执行文件，此文件有13M，请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
+        回声“ CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME = y” >> .config
+        echo“ CONFIG_FIRMWARE_INCLUDE_SRELAY = n” >> .config＃可以不集成
+        echo“ CONFIG_FIRMWARE_INCLUDE_WYY = y” >> .config＃网易云解锁
+        echo“ CONFIG_FIRMWARE_INCLUDE_WYYBIN = n” >> .config＃网易云解锁GO版本执行文件（4M多）注意固件超大小，不集成会自动下载
+        echo“ CONFIG_FIRMWARE_INCLUDE_ZEROTIER = n” >> .config #zerotier〜1.3M
+        ################################################ ######################################
+        ＃自定义添加其他功能请参考二进制配置文件/模板/目录下的配置文件。按照上面的格式添加即可
+        ＃格式如下：
+        #sed -i'/自定义项/ d'.config
+        #echo“自定义项= y” >> .config
+        ################################################ ######################################
+        须藤./clear_tree
+        sudo ./build_firmware_modify $ TNAME 0
+        须藤MV -f images / *。trx / opt / images /
+    -名称：上传软件包
+      用途：动作/ upload-artifact @ master
+      如果：always（）
+      和：
+        名称：Padavan包装
+        路径：/ opt / images

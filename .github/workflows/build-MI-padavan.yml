@@ -74,7 +74,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config #adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config #内网穿透FRPC
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=y" >> .config #内网穿透FRPS
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #TUNSAFE
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #阿里DDNS
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns

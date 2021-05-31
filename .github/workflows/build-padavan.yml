@@ -21,7 +21,7 @@ on:
 env:                      # 环境变量
   MHZ: 1100               # CPU超频频率 必须为20的倍数。开启超频请修改124行超频选项
   TNAME: RM2100           # 配置文件名  https://github.com/hanwckf/rt-n56u/tree/master/trunk/configs/templates
-  BUILD_VERSION: chongshengB  # hanwckf 或者 chongshengB
+  BUILD_VERSION: hanwckf  # hanwckf 或者 chongshengB
 
 jobs:
   build:
@@ -113,7 +113,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> configs/templates/$TNAME.config  #删除SS plus+
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> configs/templates/$TNAME.config #删除DNSFORWARDER
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> configs/templates/$TNAME.config       #删除用于KMS的工具VLMCSD
-        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> configs/templates/$TNAME.config         #删除网页终端模拟器TTYD
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=y" >> configs/templates/$TNAME.config         #删除网页终端模拟器TTYD
         echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> configs/templates/$TNAME.config       #删除用于二级路由、教育网分发IPv6地址的NAPT66
         echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> configs/templates/$TNAME.config       #删除SRELAY
         echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> configs/templates/$TNAME.config        #删除工具SOCAT

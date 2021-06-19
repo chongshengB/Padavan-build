@@ -1,4 +1,5 @@
 #修改TNAME: R2100 中的R2100为你需要编译的型号，注意名称要与https://github.com/hanwckf/rt-n56u/tree/master/trunk/configs/templates中的名字相同（不含后缀）
+#主要使用R2100、RM2100、DIR-878
 name: Build Padavan
 
 on: 
@@ -35,7 +36,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: R2100
+        TNAME: DIR-878
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -95,10 +96,14 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' .config #网页终端工具
         sed -i '/CONFIG_FIRMWARE_INCLUDE_LRZSZ/d' .config #Linux和Windows互传文件的工具
         sed -i '/CONFIG_FIRMWARE_INCLUDE_NAPT66/d' .config #教育网用
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_HTOP' .config #浏览器进程
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NANO' .config #编辑器
         echo "CONFIG_FIRMWARE_INCLUDE_LANG_CN=y" >> .config #中文语言
         echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config
         #########################################################################################
         cp -f .config configs/templates/$TNAME.config #复制config文件到configs/templates目录下
         sudo ./clear_tree

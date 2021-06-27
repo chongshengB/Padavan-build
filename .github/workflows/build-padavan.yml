@@ -36,11 +36,7 @@ jobs:
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
-    - name: set go
-      run: |
-        cd /opt/hostedtoolcache/go
-        rm -rf /opt/hostedtoolcache/go/1.14.10.
-        mv 1.15.3 1.14.10
+    
     - name: Build Firmware
       env:
         TNAME: MSG1500-7615

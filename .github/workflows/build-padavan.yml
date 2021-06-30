@@ -94,6 +94,8 @@ jobs:
         #格式如下：
         #sed -i '/自定义项/d' .config
         #echo "自定义项=y" >> .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_HTOP/d' .config
+    echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >> .config
         #########################################################################################
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0

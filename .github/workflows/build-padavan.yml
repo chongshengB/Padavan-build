@@ -19,7 +19,7 @@ on:
     types: [started]
   #workflow_dispatch:
 env:                      # 环境变量
-  MHZ: 1160               # CPU超频频率 必须为20的倍数。开启超频请修改124行超频选项
+  MHZ: 1100               # CPU超频频率 必须为20的倍数。开启超频请修改124行超频选项
   TNAME: RM2100           # 配置文件名  https://github.com/hanwckf/rt-n56u/tree/master/trunk/configs/templates
   BUILD_VERSION: hanwckf  # hanwckf 或者 chongshengB
 

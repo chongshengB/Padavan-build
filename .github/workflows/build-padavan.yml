@@ -37,8 +37,8 @@ jobs:
     sh dl_toolchain.sh
     mkdir -p /opt/images/
     
-    - name: Set Golang
-  run: |
+ - name: Set Golang
+   run: |
    cd /opt/hostedtoolcache/go
    rm -rf /opt/hostedtoolcache/go/1.14.13
    mv 1.15.6 1.14.13 

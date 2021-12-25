@@ -36,7 +36,7 @@ jobs:
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
-      name: Set Golang
+    - name: Set Golang
       run: |
         cd /opt/hostedtoolcache/go
         rm -rf /opt/hostedtoolcache/go/1.14.12

@@ -1,4 +1,6 @@
 # Padavan-build说明
+若需编译超频1000MHZ版，将https://github.com/MeIsReallyBa/padavan-4.4替换为 https://github.com/padavanonly/padavan-4.4
+
 步骤
 
 0.点击右上角的Fork按钮，进入自己fork后的仓库。

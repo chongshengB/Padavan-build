@@ -6,6 +6,6 @@
 
 2.点击页面上部的Actions按钮，点击I understand my workflows，go ahead and enable them启用action
 
-3.点击右上角的 Star 星星按钮即可开始自动编译（自己点击才会编译）。修改配置后若需再次编译，先点击Star取消Star后，再重新点击Star即可再次重新编译。
+3.点击右上角的 Star 星星按钮即可开始自动编译（自己点击才会编译）。修改配置后若需再次编译，先点击Star取消Star后，再点击Star即可重新编译。
 
 编译完成后在Actions页面底部下载固件。

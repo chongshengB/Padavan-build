@@ -31,6 +31,8 @@ jobs:
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
     - name: Clone source code
+      env:
+        KERNEL: 4.4
       run: |
         if [ $KERNEL = "4.4" ] ; then
         git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u

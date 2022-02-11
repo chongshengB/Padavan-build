@@ -1,6 +1,6 @@
 # Padavan-build说明
 
-直接fork，修改好源码地址和机型之后，选择自己要的插件，提交后点击右上角Star 星星按钮即可，自动开始编译（自己点击才会编译）。
+#直接fork，修改好源码地址和机型之后，选择自己要的插件，提交后点击右上角Star 星星按钮即可，自动开始编译（自己点击才会编译）。
 
 Padavan老毛子
 基于hanwckf,chongshengB以及padavanonly的源码整合而来，支持kvr无线漫游

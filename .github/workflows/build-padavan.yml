@@ -38,7 +38,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: MI-MINI
+        TNAME: K2P
       run: |
         cd /opt/padavan-4.4/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then

@@ -32,15 +32,15 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/hanwckf/padavan-4.4.git /opt/padavan-4.4
-        cd /opt/padavan-4.4/toolchain-mipsel
+        git clone --depth=1 https://github.com/vb1980/Padavan-KVR.git /opt/rt-n56u
+        cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P
+        TNAME: MI-MINI
       run: |
-        cd /opt/padavan-4.4/trunk
+        cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
         echo "configs/templates/$TNAME.config not found "
         exit 1
@@ -102,5 +102,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: Padavan-packages
+        name: MI-mini
         path: /opt/images

@@ -11,10 +11,17 @@ Padavan老毛子：
 添加了相关MT7615的config。
 
 以下附上他们几位的源码地址供参考
+
 hanwckf大神https://github.com/hanwckf/rt-n56u
+
 chongshengB脚本https://github.com/chongshengB/rt-n56u
+
 chongshengB融合https://github.com/vb1980/Padavan-KVR
+
 https://github.com/keke1023/Padavan
+
 https://github.com/padavanonly/rt-n56u
+
 https://github.com/immortalwrt/padavan
+
 全套https://github.com/hiboyhiboy/rt-n56u

@@ -20,6 +20,8 @@ chongshengB融合https://github.com/vb1980/Padavan-KVR
 
 https://github.com/keke1023/Padavan
 
+https://github.com/MeIsReallyBa/padavan-4.4
+
 https://github.com/padavanonly/rt-n56u
 
 https://github.com/immortalwrt/padavan

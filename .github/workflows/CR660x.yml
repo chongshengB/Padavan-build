@@ -2,6 +2,9 @@
 name: CR660x云编译
 
 on: 
+  repository_dispatch:
+  workflow_dispatch:
+
   release:
     types: [published]
   push:

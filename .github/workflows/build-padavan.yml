@@ -124,5 +124,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: k2p_padavan
+        name: k2p改32
         path: /opt/images

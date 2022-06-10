@@ -114,5 +114,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: K2Pusb
+        name: K2P改版本号
         path: /opt/images

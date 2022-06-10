@@ -37,14 +37,14 @@ jobs:
         if [ $KERNEL = "4.4" ] ; then
         git clone --depth=1 https://github.com/wozaibali/padavan4.4.git /opt/rt-n56u
         else
-        git clone --depth=1 https://github.com/wozaibali/Padavan.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/wozaibali/rt-n56uu0.git /opt/rt-n56u
         fi
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P
+        TNAME: K2P-USB-512
         KERNEL: 3.4
       run: |
         cd /opt/rt-n56u/trunk

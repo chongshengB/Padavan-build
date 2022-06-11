@@ -41,10 +41,10 @@ jobs:
         fi
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
-        mkdir -p -m 777 /opt/images/
+        mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P-USB-512-5.0
+        TNAME: K2P
         KERNEL: 3.4
       run: |
         cd /opt/rt-n56u/trunk
@@ -111,16 +111,13 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config #网易云解锁
         echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
-       #流控QOS##
-        echo "CONFIG_FIRMWARE_INCLUDE_SQM=y" >> .config #SQM QOS#CPU超频
-        echo "CONFIG_FIRMWARE_INCLUDE_OC=n" >> .config #CPU超频开关
-        echo 'CONFIG_FIRMWARE_MT7621_OC="0x312"' >> .config #此处填写对应频率的十六进制：1000Mhz=0x312 #########################################################################################
+        fi
+        #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
         #sed -i '/自定义项/d' .config
         #echo "自定义项=y" >> .config
         #########################################################################################
-
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
@@ -128,5 +125,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: Padavan512
+        name: Padavan-packages
         path: /opt/images

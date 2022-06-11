@@ -41,10 +41,10 @@ jobs:
         fi
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
-        mkdir -p /opt/images/
+        mkdir -p -m 777 /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P
+        TNAME: K2P-USB-512-5.0
         KERNEL: 3.4
       run: |
         cd /opt/rt-n56u/trunk

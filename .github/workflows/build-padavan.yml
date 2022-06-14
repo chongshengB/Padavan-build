@@ -44,7 +44,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P
+        TNAME: K2P-USB
         KERNEL: 4.4
       run: |
         cd /opt/rt-n56u/trunk
@@ -108,5 +108,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: Padavan4.4no
+        name: Padavan4.4USB
         path: /opt/images

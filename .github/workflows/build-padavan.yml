@@ -105,5 +105,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: Padavan4.4no
+        name: Padavan4.4USB
         path: /opt/images

@@ -76,7 +76,7 @@ jobs:
         if [ $KERNEL = "4.4" ] ; then
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #MENTOHUST
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=y" >> .config #SCUTCLIENT
-        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config #SS 
+        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config #SS 
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #DNSFORWARDER
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config #集成v2ray执行文件
@@ -85,11 +85,11 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config #
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不 
-        echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=y" >> .config #
-        echo "CONFIG_FIRMWARE_INCLUDE_MTR=y" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config #
+        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成
         #流控QOS##
         echo "CONFIG_FIRMWARE_INCLUDE_SQM=y" >> .config #SQM QOS#CPU超频
-        echo "CONFIG_FIRMWARE_INCLUDE_OC=y" >> .config #CPU超频开关
+        echo "CONFIG_FIRMWARE_INCLUDE_OC=n" >> .config #CPU超频开关
         echo 'CONFIG_FIRMWARE_MT7621_OC="0x312"' >> .config #此处填写对应频率的十六进制：1000Mhz=0x312
         fi
         #########################################################################################

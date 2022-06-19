@@ -74,7 +74,7 @@ jobs:
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
         if [ $KERNEL = "4.4" ] ; then
-        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >> .config #MENTOHUST
+        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=y" >> .config #MENTOHUST
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=y" >> .config #SCUTCLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config #SS 
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #adbyby plus+

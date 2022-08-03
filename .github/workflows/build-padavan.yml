@@ -84,7 +84,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=y" >> .config  #阿里云盘  ~3m
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config #
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config #在线文件管理服务
-        echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不 
+        echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不 
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config #
         echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成
         #流控QOS##

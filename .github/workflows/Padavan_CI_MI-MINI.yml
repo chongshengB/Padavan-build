@@ -33,7 +33,7 @@ env:
   IMAGES_PATH: /opt/rt-n56u/images/    
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     if: github.event.repository.owner.id == github.event.sender.id  # 自己点的 start
     steps:
     - name: Checkout Master            # 1.导入主分支

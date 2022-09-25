@@ -1,4 +1,3 @@
-#修改TNAME: K2P 中的K2P为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
 name: Build Padavan
 
 on: 
@@ -44,15 +43,15 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P
+        TNAME: RM2100
         KERNEL: 3.4
       run: |
         cd /opt/rt-n56u/trunk
-        if [ ! -f configs/templates/$TNAME.config ] ; then
-        echo "configs/templates/$TNAME.config not found "
+        if [ ! -f configs/templates/$RM2100.config ] ; then
+        echo "configs/templates/$RM2100.config not found "
         exit 1
         fi
-        cp -f configs/templates/$TNAME.config .config
+        cp -f configs/templates/$RM2100.config .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
         ################################################################################################
         #因不同型号配置功能不一样，所以先把配置项删除，如果你自己要添加其他的，也要写上删除这一条，切记！！！

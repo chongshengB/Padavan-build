@@ -110,5 +110,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: K2p5.0ld
+        name: K2p5.0l
         path: /opt/images

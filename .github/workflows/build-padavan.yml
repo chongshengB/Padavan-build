@@ -37,17 +37,17 @@ jobs:
         if [ $KERNEL = "4.4" ] ; then
         git clone --depth=1 https://gitee.com/ygyou/padavan-4.4_1.git /opt/rt-n56u
         else
-        git clone --depth=1 https://github.com/wozaibali/padavan.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/wozaibali/padavan.git /opt/rt-n56u0
         fi
-        cd /opt/rt-n56u/toolchain-mipsel
+        cd /opt/rt-n56u0/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P-USB-512
+        TNAME: K2P-USB-512-5.0
         KERNEL: 3.4
       run: |
-        cd /opt/rt-n56u/trunk
+        cd /opt/rt-n56u0/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
         echo "configs/templates/$TNAME.config not found "
         exit 1
@@ -110,5 +110,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: K2p5.0
+        name: K2p5.0ld
         path: /opt/images

@@ -7,10 +7,10 @@ on:
   push:
     tags:
     - 'v*'
-  #  branches: 
-  #    - master
-#  schedule:
-#    - cron: 0 8 * * 5
+    branches: 
+      - master
+  schedule:
+    - cron: 0 8 * * 5
   watch:
     types: [started]
 

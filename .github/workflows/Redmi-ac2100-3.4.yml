@@ -83,6 +83,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #aliddns
         echo "CONFIG_FIRMWARE_INCLUDE_SQM=y" >> .config #SQM 流控
+        echo "CONFIG_FIRMWARE_INCLUDE_NPC=y" >> .config #内网穿透NPS
         else
         echo "CONFIG_FIRMWARE_INCLUDE_WIREGUARD=n" >> .config #WireGuard是一个易于配置、快速且安全的开源 VPN
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #MENTOHUST

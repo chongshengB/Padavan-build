@@ -44,7 +44,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: MI-MINI
+        TNAME:MI-MINI
         KERNEL: 4.4
       run: |
         cd /opt/rt-n56u/trunk

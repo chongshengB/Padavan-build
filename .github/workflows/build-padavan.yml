@@ -34,7 +34,7 @@ jobs:
       env:
         KERNEL: 3.4
       run: |
-        git clone --depth=1 https://github.com/yeqingyeqing/rt-n56u.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/djh1214/rt-n56u.git /opt/rt-n56u
         fi
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh

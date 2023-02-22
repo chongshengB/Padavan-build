@@ -53,9 +53,9 @@ jobs:
         fi
         cp -f configs/templates/tplink/$TNAME.config .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
-        sudo ./clear_tree
-        sudo ./build_firmware_modify $TNAME 0
-        sudo mv -f images/*.trx /opt/images/
+        sudo ./clear_tree.sh
+        sudo ./build_firmware_modify.sh
+        sudo mv -f images/*.bin /opt/images/
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()

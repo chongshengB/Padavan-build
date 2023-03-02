@@ -16,7 +16,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
@@ -27,36 +27,35 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         sudo apt-get update
-        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
-        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
-        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+        sudo apt-get -y install autoconf autoconf-archive automake autopoint bison build-essential ca-certificates cmake cpio curl doxygen fakeroot flex gawk gettext git gperf help2man htop kmod libblkid-dev libc-ares-dev libcurl4-openssl-dev libdevmapper-dev libev-dev libevent-dev libexif-dev libflac-dev libgmp3-dev libid3tag0-dev libjpeg-dev libkeyutils-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libogg-dev libsqlite3-dev libssl-dev libtool libtool-bin libudev-dev libvorbis-dev libxml2-dev locales mc nano pkg-config ppp-dev python3 python3-docutils texinfo unzip uuid uuid-dev vim wget xxd zlib1g-dev
     - name: Clone source code
       env:
         KERNEL: 3.4
       run: |
         if [ $KERNEL = "4.4" ] ; then
-        git clone --depth=1 https://github.com/yangqing77/Padavan.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/yangqing77/padavan1.git /opt/rt-n56u
         else
-        git clone --depth=1 https://github.com/yangqing77/Padavan.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/yangqing77/padavan1.git /opt/rt-n56u
         fi
-        cd /opt/rt-n56u/toolchain-mipsel
+        #cd /opt/rt-n56u/toolchain-mipsel
+        cd /opt/rt-n56u/toolchain
         sh dl_toolchain.sh
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: D12G
+        TNAME: tl_c5-v4
         KERNEL: 3.4
       run: |
         cd /opt/rt-n56u/trunk
-        if [ ! -f configs/templates/$TNAME.config ] ; then
+        if [ ! -f configs/templates/tplink/$TNAME.config ] ; then
         echo "configs/templates/$TNAME.config not found "
         exit 1
         fi
-        cp -f configs/templates/$TNAME.config .config
+        cp -f configs/templates/tplink/$TNAME.config .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
-        sudo /opt/rt-n56u/trunk/clear_tree
-        sudo /opt/rt-n56u/trunk/build_firmware_modify $TNAME 0
-        sudo mv -f images/*.trx /opt/images/
+        sudo ./clear_tree.sh
+        sudo ./build_firmware_modify.sh
+        sudo mv -f images/*.bin /opt/images/
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()

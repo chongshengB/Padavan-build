@@ -15,9 +15,6 @@ on:
 #    - cron: 0 8 * * 5
 #  watch:
 #   types: [started]
-env:
-  TIME_ZONE: Asia/Shanghai
-  FIRMWARE_DATEPREFIX: $(date +"%Y%m%d")
 
 jobs:
   build:
@@ -115,7 +112,6 @@ jobs:
         #########################################################################################
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
-        echo "FIRMWARE_DATEPREFIX=$(date +"%Y%m%d")" >> $GITHUB_ENV
         sudo mv -f images/*.trx /opt/images/
 
     - name : Upload packages

@@ -15,11 +15,6 @@ on:
 #    - cron: 0 8 * * 5
 #  watch:
 #   types: [started]
-      upload_release:
-        type: boolean
-        description: 'upload firmware to RELEASE'
-        required: true
-        default: 'false'
 env:
   TIME_ZONE: Asia/Shanghai
   FIRMWARE_DATEPREFIX: $(date +"%Y%m%d")

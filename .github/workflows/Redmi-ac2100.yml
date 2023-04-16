@@ -15,6 +15,14 @@ on:
 #    - cron: 0 8 * * 5
 #  watch:
 #   types: [started]
+      upload_release:
+        type: boolean
+        description: 'upload firmware to RELEASE'
+        required: true
+        default: 'false'
+env:
+  TIME_ZONE: Asia/Shanghai
+  FIRMWARE_DATEPREFIX: $(date +"%Y%m%d")
 
 jobs:
   build:
@@ -31,7 +39,7 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
-        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget set-timezone "$TIME_ZONE"
     - name: Clone source code
       env:
         KERNEL: 4.4
@@ -112,6 +120,7 @@ jobs:
         #########################################################################################
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
+        echo "FIRMWARE_DATEPREFIX=$(date +"%Y%m%d")" >> $GITHUB_ENV
         sudo mv -f images/*.trx /opt/images/
 
     - name : Upload packages

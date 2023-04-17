@@ -8,7 +8,7 @@
 
 |  微信   | 支付宝  |
 |  ----  | ----  |
-| ![](https://pic.imgdb.cn/item/62502707239250f7c5b8ac3d.png) | ![](https://pic.imgdb.cn/item/62502707239250f7c5b8ac36.png) |
+| ![](https://github.com/yuos-bit/other/releases/download/Openwrt/wechat.png) | ![](https://github.com/yuos-bit/other/releases/download/Openwrt/alipay.png) |
 
 ## 赞助名单
 

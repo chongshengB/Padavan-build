@@ -39,7 +39,7 @@ jobs:
         else
         git clone --depth=1 https://github.com/maxit0m/padavan.git /opt/padavan
         fi
-        cd /opt/rt-n56u/toolchain-mipsel
+        cd /opt/padavan/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
     - name: Build Firmware

@@ -30,7 +30,7 @@ jobs:
         sudo apt install libtool-bin gperf python3-docutils autopoint gettext
     - name: Clone source code
       env:
-        KERNEL: 4.4
+        KERNEL: 3.4
       run: |
         if [ $KERNEL = "4.4" ] ; then
         git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u
@@ -42,8 +42,8 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: MI-R3G
-        KERNEL: 4.4
+        TNAME: MIWIFI-MINI
+        KERNEL: 3.4
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then

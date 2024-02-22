@@ -16,7 +16,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
@@ -27,9 +27,9 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         sudo apt-get update
-        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
-        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
-        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+        sudo apt-get -y install bc unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
+        kmod cpio git python3-docutils gettext automake autopoint texinfo build-essential help2man \
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget libc-dev-bin
     - name: Clone source code
       env:
         KERNEL: 3.4
@@ -38,15 +38,19 @@ jobs:
         git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u
         else
         git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
+        sed -i 's|https://gomirrors.org/dl/go/go$(go_version).linux-amd64.tar.gz|https://dl.google.com/go/go$(go_version).linux-amd64.tar.gz|g' /opt/rt-n56u/trunk/tools/Makefile
+        sed -i 's|https://bintray.com/htop/source/download_file?file_path=htop-3.0.2.tar.gz|https://raw.githubusercontent.com/hanwckf/rt-n56u/master/trunk/user/htop/htop-3.0.2.tar.gz|g' /opt/rt-n56u/trunk/user/htop/Makefile
         fi
+    - name: Prepare toolchain
+      run: |
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
-        mkdir -p /opt/images/
     - name: Build Firmware
       env:
         TNAME: K2P
         KERNEL: 3.4
       run: |
+        mkdir -p /opt/images/
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
         echo "configs/templates/$TNAME.config not found "
@@ -119,7 +123,7 @@ jobs:
         #echo "自定义项=y" >> .config
         #########################################################################################
         sudo ./clear_tree
-        sudo ./build_firmware_modify $TNAME 0
+        fakeroot ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
       uses: actions/upload-artifact@master

@@ -111,6 +111,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_RPL2TP=y" >> .config #RPL2TP
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT=y" >> .config #SOFTETHERVPN
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER=y" >> .config #SOFTETHERVPN
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config #frp
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=y" >> .config #frp
         fi
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可

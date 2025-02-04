@@ -44,7 +44,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P
+        TNAME: RM2100
         KERNEL: 3.4
       run: |
         cd /opt/rt-n56u/trunk

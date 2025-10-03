@@ -1,0 +1,327 @@
+name: 自定义云编译3.4内核的Padavan
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        type: choice
+        description: 'target to compile'
+        options:
+        - CMCC_L1-1
+        - E8820V2
+      plugins:
+        description: 'json format string of include configs'
+        required: true
+        default: '{"aria":"n","transmission":"y","vpnsvr":"n","vpncli":"n","vpncmd":"n","openvpn":"n","ss":"n","v2ray":"n","xray":"n","trojan":"n","ssobfs":"n","dnsforwarder":"n","adbyby":"n","adguardhome":"n","vim":"y","opkg":"y","smartdns":"n","aliddns":"n","zerotier":"n","frpc":"n","frps":"n","ddnsto":"n","wireguard":"n","aldriver":"n","sqm":"n","mentohust":"n","scutclient":"n","njitclient":"n","minieap":"n","dogcom":"n"}'
+
+      firmwarever:
+        description: 'firmware''s version'
+        required: true
+        default: '20250414'
+
+      upload_release:
+        type: boolean
+        description: 'upload firmware to RELEASE'
+        required: true
+        default: 'true'
+
+      upload_cloudreve:
+        type: boolean
+        description: '上传固件和日志到Cloudreve'
+        required: false
+        default: 'true'  # 默认上传到Cloudreve
+
+env:
+  REPOSITORY_URL: https://github.com/yuos-bit/Padavan
+  WORK_PATH: /opt/padavan-3.4
+  TIME_ZONE: Asia/Shanghai
+  FIRMWARE_DATEPREFIX: $(date +"%Y%m%d")
+  FIRMWARE_AUTHOR: yuos-bit
+  FIRMWARE_PATH: /opt/firmwares
+  TZ: Asia/Shanghai
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+    - name: 初始化工作流
+      uses: actions/checkout@main
+
+    
+    - name: 安装编译环境
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        sudo apt update -y
+        sudo apt full-upgrade -y
+        sudo apt-get install -y software-properties-common
+        sudo apt install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential \
+        bzip2 ccache clang cmake cpio curl device-tree-compiler flex gawk gcc-multilib g++-multilib gettext \
+        genisoimage git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libfuse-dev libglib2.0-dev \
+        libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libpython3-dev \
+        libreadline-dev libssl-dev libtool llvm lrzsz msmtp ninja-build p7zip p7zip-full patch pkgconf \
+        python3 python3-pyelftools python3-setuptools qemu-utils rsync scons squashfs-tools subversion \
+        swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
+        sudo timedatectl set-timezone "$TZ"
+        sudo mkdir -p /workdir
+        sudo chown $(id -u):$(id -g) /workdir
+
+    - name: 拉取源码
+      run: |
+        df -hT $PWD
+        git clone --depth=1 --branch dev $REPOSITORY_URL $WORK_PATH
+        cp -rf $GITHUB_WORKSPACE/DIY/trunk/configs/* $WORK_PATH/trunk/configs/
+        cd $WORK_PATH/toolchain-mipsel
+        sudo sh dl_toolchain.sh
+        mkdir -p /opt/images/
+        ln -sf /opt/padavan-3.4 $GITHUB_WORKSPACE/padavan-3.4
+
+    - name: 同步编译预设插件
+      run: | 
+        echo "aria=${{fromJson(github.event.inputs.plugins).aria}}" >> $GITHUB_ENV
+        echo "transmission=${{fromJson(github.event.inputs.plugins).transmission}}" >> $GITHUB_ENV
+        echo "vpnsvr=${{fromJson(github.event.inputs.plugins).vpnsvr}}" >> $GITHUB_ENV
+        echo "vpncli=${{fromJson(github.event.inputs.plugins).vpncli}}" >> $GITHUB_ENV
+        echo "vpncmd=${{fromJson(github.event.inputs.plugins).vpncmd}}" >> $GITHUB_ENV
+        echo "openvpn=${{fromJson(github.event.inputs.plugins).openvpn}}" >> $GITHUB_ENV
+        echo "ss=${{fromJson(github.event.inputs.plugins).ss}}" >> $GITHUB_ENV
+        echo "v2ray=${{fromJson(github.event.inputs.plugins).v2ray}}" >> $GITHUB_ENV
+        echo "xray=${{fromJson(github.event.inputs.plugins).xray}}" >> $GITHUB_ENV
+        echo "trojan=${{fromJson(github.event.inputs.plugins).trojan}}" >> $GITHUB_ENV
+        echo "ssobfs=${{fromJson(github.event.inputs.plugins).ssobfs}}" >> $GITHUB_ENV
+        echo "dnsforwarder=${{fromJson(github.event.inputs.plugins).dnsforwarder}}" >> $GITHUB_ENV
+        echo "adbyby=${{fromJson(github.event.inputs.plugins).adbyby}}" >> $GITHUB_ENV
+        echo "adguardhome=${{fromJson(github.event.inputs.plugins).adguardhome}}" >> $GITHUB_ENV
+        echo "vim=${{fromJson(github.event.inputs.plugins).vim}}" >> $GITHUB_ENV
+        echo "opkg=${{fromJson(github.event.inputs.plugins).opkg}}" >> $GITHUB_ENV
+        echo "smartdns=${{fromJson(github.event.inputs.plugins).smartdns}}" >> $GITHUB_ENV
+        echo "aliddns=${{fromJson(github.event.inputs.plugins).aliddns}}" >> $GITHUB_ENV
+        echo "zerotier=${{fromJson(github.event.inputs.plugins).zerotier}}" >> $GITHUB_ENV
+        echo "frpc=${{fromJson(github.event.inputs.plugins).frpc}}" >> $GITHUB_ENV
+        echo "frps=${{fromJson(github.event.inputs.plugins).frps}}" >> $GITHUB_ENV
+        echo "ddnsto=${{fromJson(github.event.inputs.plugins).ddnsto}}" >> $GITHUB_ENV
+        echo "wireguard=${{fromJson(github.event.inputs.plugins).wireguard}}" >> $GITHUB_ENV
+        echo "aldriver=${{fromJson(github.event.inputs.plugins).aldriver}}" >> $GITHUB_ENV
+        echo "sqm=${{fromJson(github.event.inputs.plugins).sqm}}" >> $GITHUB_ENV
+        echo "mentohust=${{fromJson(github.event.inputs.plugins).mentohust}}" >> $GITHUB_ENV
+        echo "scutclient=${{fromJson(github.event.inputs.plugins).scutclient}}" >> $GITHUB_ENV
+        echo "njitclient=${{fromJson(github.event.inputs.plugins).njitclient}}" >> $GITHUB_ENV
+        echo "minieap=${{fromJson(github.event.inputs.plugins).minieap}}" >> $GITHUB_ENV
+        echo "dogcom=${{fromJson(github.event.inputs.plugins).dogcom}}" >> $GITHUB_ENV
+
+    - name: 同步插件设置
+      run: |
+        cd $WORK_PATH/trunk
+        if [ ! -f configs/templates/${{ github.event.inputs.target }}.config ] ; then
+        echo "configs/templates/${{ github.event.inputs.target }}.config not found"
+        exit 1
+        fi
+        cp -f configs/templates/${{ github.event.inputs.target }}.config .config
+        ################################################################################################
+        #因不同型号配置功能不一样，所以先把配置项删除，如果你自己要添加其他的，也要写上删除这一条，切记！！！
+        ################################################################################################
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER/d' .config #删除配置项SOFTETHERVPN
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT/d' .config #删除配置项SOFTETHERVPN
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD/d' .config #删除配置项SOFTETHERVPN   
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS/d' .config #删除配置项SS plus+
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config #删除配置项SS server
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config #删除配置项DNSFORWARDER
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ADBYBY/d' .config #删除配置项adbyby plus+
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config #删除配置项tunsafe
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS/d' .config #删除配置项阿里DDNS
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config #删除配置项srelay
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME/d' .config #删除配置项adguardhome
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_VIM/d' .config #删除配置项vim
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_OPKG/d' .config #删除配置项opkg
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ZEROTIER/d' .config #删除配置项zerotier
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DDNSTO/d' .config #删除配置项ddnsto
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_WIREGUARD/d' .config #删除配置项wireguard
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALDRIVER/d' .config #删除配置项阿里云盘
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config #删除配置项smartdns
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SQM/d' .config #删除配置项sqm
+        #下载功能
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config #删除配置项aria
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL/d' .config #删除配置项aria网页控制台
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TRANSMISSION/d' .config #删除配置项TRANSMISSION
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL/d' .config #删除配置项TRANSMISSION网页控制台
+        #校园网相关开始
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST/d' .config #删除配置项MENTOHUST
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT/d' .config #删除配置项SCUTCLIENT
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIEAP/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' .config
+        #校园网相关结束
+        sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
+        ######################################################################
+        #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
+        ######################################################################
+        echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER=${{env.vpnsvr}}" >> .config #SOFTETHERVPN
+        echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT=${{env.vpncli}}" >> .config #SOFTETHERVPN
+        echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD=${{env.vpncmd}}" >> .config #SOFTETHERVPN
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENVPN=${{env.openvpn}}" >> .config #OPENVPN
+        #科学相关
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=${{env.ss}}" >> .config #SS plus+
+        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=${{env.v2ray}}" >> .config #集成v2ray执行文件（3.8M左右)
+        echo "CONFIG_FIRMWARE_INCLUDE_XRAY=${{env.xray}}" >> .config #集成xray执行文件(5.6M左右)，可以代替v2ray，注：如果闪存太小不够还是建议使用v2ray
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=${{env.trojan}}" >> .config #集成trojan执行文件(1.1M左右)
+        echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=${{env.ssobfs}}" >> .config # simple-obfs混淆插件
+        echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server
+        #
+        echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config #可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #tunsafe
+        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=${{env.dnsforwarder}}" >> .config #dnsforwarder
+        #
+        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=${{env.adbyby}}" >> .config #adbyby plus+
+        #
+        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=${{env.adguardhome}}" >> .config #adguardhome
+        echo "CONFIG_FIRMWARE_INCLUDE_VIM=${{env.vim}}" >> .config #vim
+        echo "CONFIG_FIRMWARE_INCLUDE_OPKG=${{env.opkg}}" >> .config #opkg
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=${{env.smartdns}}" >> .config #smartdns
+        #
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=${{env.aliddns}}" >> .config #阿里DDNS
+        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=${{env.zerotier}}" >> .config #zerotier ~1.3M
+        echo "CONFIG_FIRMWARE_INCLUDE_DDNSTO=${{env.ddnsto}}" >> .config #ddnsto
+        echo "CONFIG_FIRMWARE_INCLUDE_WIREGUARD=${{env.wireguard}}" >> .config #wireguard
+        #
+        echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=${{env.aldriver}}" >> .config #阿里云盘
+        echo "CONFIG_FIRMWARE_INCLUDE_SQM=${{env.sqm}}" >> .config #SQM
+        #
+        # frp & frps
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=${{env.frpc}}" >> .config #frp客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=${{env.frps}}" >> .config #frp服务端
+        # frp & frps
+        #下载功能
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=${{env.aria}}" >> .config #配置项aria
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=${{env.aria}}" >> .config #配置项aria网页控制台
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=${{env.transmission}}" >> .config #删除配置项TRANSMISSION
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=${{env.transmission}}" >> .config #配置项TRANSMISSION网页控制台
+        #校园网相关开始
+        echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=${{env.mentohust}}" >> .config #MENTOHUST
+        echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=${{env.scutclient}}" >> .config #SCUTCLIENT
+        echo "CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT=${{env.njitclient}}" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_MINIEAP=${{env.minieap}}" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_DOGCOM=${{env.dogcom}}" >> .config
+        #校园网相关结束
+        #########################################################################################
+        #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
+        #格式如下：
+        #sed -i '/自定义项/d' .config
+        #echo "自定义项=y" >> .config
+        sed -i "s/FIRMWARE_BUILDS_REV=.*/FIRMWARE_BUILDS_REV=${{ github.event.inputs.firmwarever }}/g" ./versions.inc
+        echo '更新版本号时间'
+        #########################################################################################
+
+    - name: 编译固件
+      run: |
+        cd $WORK_PATH/trunk
+        sudo ./clear_tree
+        sudo ./build_firmware_modify ${{ github.event.inputs.target }} 0
+        echo "FIRMWARE_DATEPREFIX=$(date +"%Y%m%d")" >> $GITHUB_ENV
+        
+    - name: 整理固件文件
+      id: organize
+      run: |
+        mkdir -p $FIRMWARE_PATH/
+        cd $WORK_PATH/trunk/images
+        for firmwarefile in $(ls *.trx)
+        do sudo mv "$firmwarefile" "$FIRMWARE_PATH/${{ github.event.inputs.target }}_${FIRMWARE_DATEPREFIX}_${FIRMWARE_AUTHOR}_kernel3.4_8M.trx"
+        done
+        cd $FIRMWARE_PATH
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        echo "status=success" >> $GITHUB_OUTPUT
+        
+    - name : 上传包
+      uses: actions/upload-artifact@main
+      if: steps.organize.outputs.status == 'success'
+      with:
+        name: Padavan3.4-${{ github.event.inputs.target }}
+        path: ${{ env.FIRMWARE }}
+          
+  
+    - name: 生成发布标签
+      id: tag
+      if: steps.organize.outputs.status == 'success' && github.event.inputs.upload_release == 'true' && !cancelled()
+      run: |
+        echo "release_tag=$(date +"%Y.%m.%d-%H%M")-Padavan3.4-${{ github.event.inputs.target }}" >> $GITHUB_OUTPUT
+        touch release.txt
+        echo "status=success" >> $GITHUB_OUTPUT
+
+    - name: 上传固件发布
+      uses: softprops/action-gh-release@v2.0.4
+      if: steps.tag.outputs.status == 'success' && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        body_path: release.txt
+        files: ${{ env.FIRMWARE }}/*
+
+    - name: 上传到Cloudreve
+      if: steps.organize.outputs.status == 'success' && github.event.inputs.upload_cloudreve == 'true' && !cancelled()
+      run: |
+
+          # 获取日期前缀
+          CURRENT_DATE=$(date +"%Y%m%d")
+
+          # 获取设备型号
+          DEVICE_MODEL="${{ github.event.inputs.target }}"
+
+          # 目标目录路径：20250220/miwifi-4c
+          TARGET_DIR="${CURRENT_DATE}/${DEVICE_MODEL}"
+
+          # 检查目标目录是否存在
+          echo "检查WebDAV目标目录: $TARGET_DIR"
+          if ! curl -u "${{ secrets.WEBDAV_USERNAME }}:${{ secrets.WEBDAV_PASSWORD }}" --head "${{ secrets.WEBDAV_URL }}/${TARGET_DIR}" | grep -q "200 OK"; then
+            echo "目标目录不存在，正在创建..."
+            curl -u "${{ secrets.WEBDAV_USERNAME }}:${{ secrets.WEBDAV_PASSWORD }}" -X MKCOL "${{ secrets.WEBDAV_URL }}/${TARGET_DIR}"
+            echo "目录已创建: $TARGET_DIR"
+          else
+            echo "目标目录已存在: $TARGET_DIR"
+          fi
+          # 上传固件
+          UPLOAD_PATH="${{ env.FIRMWARE }}/*.trx"
+          echo "开始上传固件文件到Cloudreve..."
+          for file in $UPLOAD_PATH; do
+            if [[ -f $file ]]; then
+              echo "上传文件: $file"
+              curl -u "${{ secrets.WEBDAV_USERNAME }}:${{ secrets.WEBDAV_PASSWORD }}" -T "$file" "${{ secrets.WEBDAV_URL }}/${TARGET_DIR}/$(basename $file)"
+            else
+              echo "未找到文件: $file"
+            fi
+          done
+          # 上传日志文件（如果有的话）
+          LOGS_PATH="${{ runner.workspace }}/logs/*"
+          echo "开始上传日志文件到Cloudreve..."
+          for log in $LOGS_PATH; do
+            if [[ -f $log ]]; then
+              echo "上传日志文件: $log"
+              curl -u "${{ secrets.WEBDAV_USERNAME }}:${{ secrets.WEBDAV_PASSWORD }}" -T "$log" "${{ secrets.WEBDAV_URL }}/${TARGET_DIR}/$(basename $log)"
+            else
+              echo "未找到日志文件: $log"
+            fi
+          done
+    
+    - name: 删除工作流程运行
+      uses: Mattraks/delete-workflow-runs@main
+      with:
+        retain_days: 7
+        keep_minimum_runs: 4
+    
+    - name: 删除旧版本
+      uses: dev-drprasad/delete-older-releases@master
+      if: github.event.inputs.upload_release == 'true' && !cancelled()
+      with:
+        keep_latest: 8
+        delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: 删除工件上过时的固件
+      uses: c-hive/gha-remove-artifacts@v1.4.0
+      if: steps.organizer.outputs.status == 'success'
+      with:
+        age: '1 day'
+        skip-recent: 5
